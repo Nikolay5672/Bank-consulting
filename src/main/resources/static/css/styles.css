@@ -1,0 +1,58 @@
+html {
+  font-size: 14px;
+}
+
+.header {
+  background: rgb(26, 26, 26);
+  font-family: 'Lexend', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.btn-danger {
+  background-color: red;
+  font-size: 'Lexend', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: black;
+}
+
+.hideable{
+  display: none;
+}
+
+.appointment-form {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    width: 40%;
+    height: 40%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  header .text-dark {
+    display: block;
+    margin: 13px 0;
+  }
+}
+
+.logo a:hover {
+  text-decoration: none;
+}
+
+header .collapse {
+  flex-grow: 0 !important;
+}
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+#appointment-header {
+    margin-bottom:30px;
+}

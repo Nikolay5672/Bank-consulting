@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link href="./css/styles.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+</head>
+<!-- VIEWS: employee, departments, location, services, appointments -->
+<body>
+  <div class="header"></div>
+
+  <div class="container col-md-12 justify-content-center text-center">
+    <div class="text-end">
+      <a href="login.html" onclick="logout" class="btn btn-danger">Log out</a>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg>
+    <h5>Welcome, <span id="user"></span>!</h5>
+  </div>
+
+  <div class="container-fluid pb-5">
+    <!-- EMPLOYEE VIEW -->
+    <div class="col-md-12 pb-5">
+      <h2 class="text-center">Employees</h2>
+      
+      <table id="employeeView" class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th class="text-center">Edit / Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+        </tbody>
+      </table>
+
+      <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#employeeModal">Add</button>      </div>
+    </div>
+    
+    <!-- DEPARTMENTS VIEW -->
+    <div class="row">
+    <div class="col-md-6 pb-5">
+      <h2 class="text-center">Department</h2>
+      
+      <table id="departmentsView" class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Department</th>
+            <th class="text-center">Edit / Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#depModal">Add</button>
+      </div>
+    </div>
+    </div>
+
+    <!-- SERVICES VIEW -->
+    <div class="col-md-6 pb-5">
+      <h2 class="text-center">Services</h2>
+      
+      <table id="servicesView" class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Service</th>
+            <th>Department</th>
+            <th class="text-center">Edit / Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#serviceModal">Add</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- LOCATION VIEW -->
+  <div class="col-md-6 pb-5">
+    <h2 class="text-center">Locations</h2>
+    
+    <table id="locationView" class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Location</th>
+          <th>Link (if online)</th>
+          <th class="text-center">Edit / Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="col-md-12 text-center">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#locationModal">Add</button>
+    </div>
+  </div>
+
+    <!-- APPOINTMENTS VIEW -->
+    <div class="col-md-12 pb-5">
+      <h2 class="text-center">Appointments</h2>
+      
+      <table id="appointmentsView" class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date / Time</th>
+            <th>Client</th>
+            <th>Employee</th>
+            <th>Service</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th class="text-center">Edit / Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  <!-- Employee Modal -->
+  <div class="modal fade" id="employeeModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="employeeModalLabel">Add New Employee</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="employeeForm">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" required>
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="phone" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="text" class="form-control" id="password" required>
+            </div>
+            <div class="mb-3">
+              <label for="role" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+              </svg> Role</label>
+              <select class="form-select" id="role" required>
+                <option value="">Choose...</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="department" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+              </svg> Department</label>
+              <select class="form-select" id="department" required>
+                <option value="">Choose...</option>
+                <!-- Dropdown options for departments will be populated dynamically with JavaScript -->
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addEmployeeBtn">Add Employee</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Department Modal -->
+  <div class="modal fade" id="depModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="col-md-12 text-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="depModalLabel">Add New Department</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form id="depForm">
+              <div class="mb-3">
+                <label for="departmentName" class="form-label">Department:</label>
+                <input type="text" class="form-control" id="departmentName" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="addDepBtn">Add Department</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <!-- Service Modal -->
+  <div class="modal fade" id="serviceModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="serviceModalLabel">Add New Service</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="serviceForm">
+            <div class="mb-3">
+              <label for="serviceType" class="form-label">Type</label>
+              <input type="text" class="form-control" id="serviceType" required>
+            </div>
+            <div class="mb-3">
+              <label for="depId" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+              </svg> Department</label>
+              <select class="form-select" id="depId" required>
+                <option value="">Choose...</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addServiceBtn">Add Service</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- location Modal -->
+  <div class="modal fade" id="locationModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="locationModalLabel">Add New Location</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="locationForm">
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" required>
+            </div>
+            <div class="mb-3">
+              <label for="url" class="form-label">URL</label>
+              <input type="text" class="form-control" id="url" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addLocationBtn">Add Location</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+<!-- DEPARTMENTS EDIT MODAL -->
+<div id="editDepartment" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit</h5>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-6">
+          <label for="departmentChangedName" class="form-label">Department</label>
+          <input type="text" class="form-control" id="departmentChangedName" placeholder="Department" value="" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveChangesDepartment" type="button" class="btn btn-primary">Save changes</button>
+        <button id="closeEditDepartment" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES EDIT MODAL -->
+<div id="editService" class="modal modalEditService" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit</h5>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-6">
+          <label for="serviceChangedName" class="form-label">Service</label>
+          <input type="text" class="form-control" id="serviceChangedName" placeholder="Service" value="" required>
+        </div>
+        <div class="col-sm-6">
+          <label for="serviceChangedDepartmentId" class="form-label">Department</label>
+          <select class="form-select" id="serviceChangedDepartmentId" required>
+            <option value="">Choose...</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveChangesService" type="button" class="btn btn-primary">Save changes</button>
+        <button id="closeEditService" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOCATIONS EDIT MODAL -->
+<div id="editLocation" class="modal modalEditLocation" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit</h5>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-6">
+          <label for="locationChangedName" class="form-label">Location</label>
+          <input type="text" class="form-control" id="locationChangedName" placeholder="Location" value="" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveChangesLocation" type="button" class="btn btn-primary">Save changes</button>
+        <button id="closeEditLocation" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- EMPLOYEES EDIT MODAL -->
+<div id="editEmployee" class="modal modalEditEmployee" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit</h5>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-6">
+          <label for="employeeChangedFirstName" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="employeeChangedFirstName" placeholder="First Name" value="" required>
+        </div>
+        <div class="col-sm-6">
+          <label for="employeeChangedLastName" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="employeeChangedLastName" placeholder="Last Name" value="" required>
+        </div>
+        <div class="col-sm-6">
+          <label for="employeeChangedEmail" class="form-label">Email</label>
+          <input type="text" class="form-control" id="employeeChangedEmail" placeholder="Email" value="" required>
+        </div>
+        <div class="col-sm-6">
+          <label for="employeeChangedPhone" class="form-label">Phone</label>
+          <input type="text" class="form-control" id="employeeChangedPhone" placeholder="Phone" value="" required>
+        </div>
+        <div class="col-sm-6">
+          <label for="employeeChangedRoleId" class="form-label">Role</label>
+          <select class="form-select" id="employeeChangedRoleId" required>
+            <option value="">Choose...</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <label for="employeeChangedDepartmentId" class="form-label">Department</label>
+          <select class="form-select" id="employeeChangedDepartmentId" required>
+            <option value="">Choose...</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <label for="employeeChangedPassword" class="form-label">New Password</label>
+          <input type="password" class="form-control" id="employeeChangedPassword" placeholder="New Password" value="" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveChangesEmployee" type="button" class="btn btn-primary">Save changes</button>
+        <button id="closeEditEmployee" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/login.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/editService.js"></script>
+<script src="js/editLocation.js"></script>
+<script src="js/editDepartments.js"></script>
+<script src="js/editEmployees.js"></script>
+</body>
+</html>
